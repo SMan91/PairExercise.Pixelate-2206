@@ -20,12 +20,32 @@ button.addEventListener("click", function (e) {
   makeRow(20);
 });
 
-table.addEventListener("click", function (e) {
-  console.log("clicked!");
+let color = "red";
+let clicked = false;
+
+let select = document.querySelector("select");
+select.addEventListener("change", function (e) {
+  color = e.target.value;
+});
+
+table.addEventListener("mousedown", function (e) {
+  clicked = true;
+});
+
+table.addEventListener("mouseup", function (e) {
+  clicked = false;
+});
+
+table.addEventListener("mouseover", function (e) {
   let square = e.target;
-  if (square.className === undefined || square.className === "") {
-    square.className = "aquamarine";
-  } else {
-    square.className = "";
+  if (clicked === true) {
+    if (
+      square !== document.querySelector("table") &&
+      (square.className === undefined || square.className === "")
+    ) {
+      square.className = color;
+    } else {
+      square.className = "";
+    }
   }
 });
